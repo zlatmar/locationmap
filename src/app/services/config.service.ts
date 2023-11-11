@@ -1,24 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { Config } from '../interfaces/config';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class ConfigService {
-    apiUrl: string = '';
-    apiKey: string = '';
-    private configUrl = 'assets/config.json';
+  apiUrl: string = '';
+  apiKey: string = '';
+  private configUrl = 'assets/config.json';
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    initConfig() {
-        return this.http.get<Config>(this.configUrl)
-            .toPromise()
-            .then(configData => {
-                this.apiUrl = configData?.API_URL || '';
-                this.apiKey = configData?.API_KEY || '';
-            });
-    }
+  async initConfig() {
+    const req = this.http.get<Config>(this.configUrl);
+    const configData = await lastValueFrom(req);
+    this.apiUrl = configData?.API_URL || '';
+    this.apiKey = configData?.API_KEY || '';
+  }
 }
