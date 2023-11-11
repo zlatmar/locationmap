@@ -1,6 +1,7 @@
 # LocationMap
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+## Preview
+![](https://github.com/zlatmar/locationmap/blob/main/locationmap.gif)
 
 ## Run application
 
